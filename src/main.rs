@@ -6,10 +6,11 @@ use yamlisp::LispIR;
 
 fn main() {
     let src = r#"
-        (test "foo" 2 -2 2.0)
+    ((name . "John Doe")
+     (age . 43)
+     (phones "+44 1234567" "+44 2345678"))
     "#;
-    let val = lexpr::from_str(src).unwrap();
-    println!("{:?}", &val);
-    let ir = LispIR(&val);
-    println!("{}", serde_lexpr::to_string(&ir).unwrap());
+    println!("{}", src);
+    let val = lexpr::from_str(&src).unwrap();
+    println!("{}", serde_yaml::to_string(&LispIR(&val)).unwrap());
 }
